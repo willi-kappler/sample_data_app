@@ -1,0 +1,6 @@
+
+
+https://kivy.org/doc/stable-2.3.0/guide/packaging-android.html
+
+
+https://buildozer.readthedocs.io/en/latest/installation.html
