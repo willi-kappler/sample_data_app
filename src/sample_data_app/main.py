@@ -1,51 +1,58 @@
 
-import numpy as np
-import cv2
+from typing import override
 
 from kivy.app import App
-from kivy.uix.button import Button
-from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.camera import Camera
+from kivy.uix.screenmanager import ScreenManager
 
+from sd_main_menu import SDMainScreen
+from sd_scan_qr import SDQRScreen
+from sd_edit_data import SDEditScreen
+from sd_show_error import SDErrorScreen
 
 class SDApp(App):
-    cam = Camera(resolution=(320, 240))
+    def __init__(self):
+        print("Init app")
 
+        self.error = ""
+        self.qr_data = ""
+
+        super(SDApp, self).__init__()
+
+    @override
     def build(self):
-        #parent = AnchorLayout(anchor_x="center", anchor_y="top")
-        parent = BoxLayout(orientation="vertical")
+        print("Build app")
 
-        self.cam.play = True
+        self.screen_manager = ScreenManager()
+        self.screen_manager.add_widget(SDMainScreen(self, "main_screen"))
+        self.screen_manager.add_widget(SDQRScreen(self, "scan_screen"))
+        self.screen_manager.add_widget(SDEditScreen(self, "edit_screen"))
+        self.screen_manager.add_widget(SDErrorScreen(self, "error_screen"))
 
-        scan_button = Button(text="Scan QR code")
-        scan_button.bind(on_release=self.scan_image)
+        self.screen_manager.current = "main_screen"
 
-        parent.add_widget(self.cam)
-        parent.add_widget(scan_button)
+        return self.screen_manager
 
-        return parent
+    def main_screen(self):
+        self.screen_manager.current = "main_screen"
 
-    def scan_image(self, obj):
-        print("Scan image...")
+    def scan_screen(self):
+        self.screen_manager.current = "scan_screen"
 
-        # Get texture, size and pixel data
-        texture = self.cam.texture
-        height, width = texture.height, texture.width
-        pixels = texture.pixels
+    def edit_screen(self):
+        self.screen_manager.current = "edit_screen"
 
-        # Converto to image
-        data = np.frombuffer(pixels, np.uint8)
-        image = data.reshape(height, width, 4)
+    def error_screen(self):
+        if self.error != "":
+            self.screen_manager.current = "error_screen"
 
-        # QR code detector
-        detector = cv2.QRCodeDetector()
-        data, vertices_array, binary_qrcode = detector.detectAndDecode(image)
+    def store_data(self, qr_data):
+        self.qr_data = qr_data
 
-        if vertices_array is not None:
-            print(f"QRCode data: {data}")
-            self.cam.play = False
-        else:
-            print("There was some error")
+    def set_error(self, error):
+        self.error = error
+
+    def quit(self):
+        self.stop()
 
 
 if __name__ == "__main__":
