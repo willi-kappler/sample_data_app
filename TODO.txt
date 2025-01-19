@@ -1,6 +1,12 @@
 
 
+# Screen manager:
+https://kivy.org/doc/stable/api-kivy.uix.screenmanager.html
+
+
+
+# Build Android App:
 https://kivy.org/doc/stable-2.3.0/guide/packaging-android.html
 
-
 https://buildozer.readthedocs.io/en/latest/installation.html
+
