@@ -1,9 +1,8 @@
 from typing import override
 
-from kivy.uix.label import Label
+from kivy.uix.screenmanager import Screen
 from kivy.uix.button import Button
 from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.screenmanager import Screen
 
 class SDErrorScreen(Screen):
     def __init__(self, main_app, name: str):
@@ -15,10 +14,10 @@ class SDErrorScreen(Screen):
 
         layout = BoxLayout(orientation="vertical")
 
-        self.error_label = Label()
+        self.error_label = Button(text="Empty", disabled=True)
 
         ok_button = Button(text="OK")
-        ok_button.bind(on_release=lambda obj: self.main_app.main_screen())
+        ok_button.bind(on_release=lambda obj: self.main_app.main_screen()) # type: ignore
 
         layout.add_widget(self.error_label)
         layout.add_widget(ok_button)
@@ -27,5 +26,7 @@ class SDErrorScreen(Screen):
 
     @override
     def on_enter(self, *args):
-        self.error_label.text = self.main_app.error
+        tmp_data = self.main_app.tmp_data
+        if "error" in tmp_data:
+            self.error_label.text = self.main_app.tmp_data["error"]
 
