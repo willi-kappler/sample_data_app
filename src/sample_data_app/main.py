@@ -1,5 +1,6 @@
 
 from typing import override
+import json
 
 from kivy.app import App
 from kivy.uix.screenmanager import ScreenManager
@@ -18,6 +19,11 @@ class SDApp(App):
         self.tmp_data = {}
 
         super(SDApp, self).__init__()
+
+        # Load sample data from json file if available:
+        with open("sample_data.json") as jf:
+            self.all_data = json.load(jf)
+
 
     @override
     def build(self):
@@ -54,9 +60,10 @@ class SDApp(App):
         if qr_id:
             print("Save data...")
             self.all_data[qr_id] = data
-            # TODO: save data to disk
-
             print(f"Number of sets: {len(self.all_data)}")
+
+            with open("sample_data.json", "w") as jf:
+                json.dump(self.all_data, jf)
 
     def clean_tmp_data(self):
         self.tmp_data = {}
