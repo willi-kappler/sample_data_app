@@ -2,9 +2,10 @@
 version = "0.1"
 name = "SampleDataApp"
 dependencies = [
-    "kivy >= 2.3.0"
-    "opencv-python > 4.9.0"
-    "plyer >= 2.1.0"
+    "kivy >= 2.3.0",
+    "opencv-python > 4.9.0",
+    "plyer >= 2.1.0",
+    "segno >= 1.6.1"
 ]
 requires-python = ">= 3.12"
 readme = "README.md"
@@ -13,7 +14,7 @@ maintainers = [
   {name = "Willi Kappler", email = "grandor@gmx.de"}
 ]
 authors = [
-  {name = "Willi Kappler", email = "grandor@gmx.de"},
+  {name = "Willi Kappler", email = "grandor@gmx.de"}
 ]
 keywords = ["sample", "data", "collection", "metadata"]
 license = {text = "MIT License"}

@@ -8,6 +8,7 @@
         mypy
         opencv4
         plyer
+        segno
         ]))
       pyright
       ruff
