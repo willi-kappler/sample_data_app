@@ -1,6 +1,7 @@
 
 from typing import override
 import json
+import os
 
 from kivy.app import App
 from kivy.uix.screenmanager import ScreenManager
@@ -21,8 +22,9 @@ class SDApp(App):
         super(SDApp, self).__init__()
 
         # Load sample data from json file if available:
-        with open("sample_data.json") as jf:
-            self.all_data = json.load(jf)
+        if os.path.exists("sample_data.json"):
+            with open("sample_data.json") as jf:
+                self.all_data = json.load(jf)
 
 
     @override
