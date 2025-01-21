@@ -33,7 +33,7 @@ class SDQRScreen(Screen):
         self.add_widget(layout)
 
     @override
-    def on_enter(self, *args):
+    def on_pre_enter(self, *args):
         self.cam.play = True
 
     @override

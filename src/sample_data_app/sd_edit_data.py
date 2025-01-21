@@ -91,7 +91,7 @@ class SDEditScreen(Screen):
         self.add_widget(scroll_view)
 
     @override
-    def on_enter(self, *args):
+    def on_pre_enter(self, *args):
         tmp_data = self.main_app.tmp_data
 
         if "qr_id" in tmp_data:

@@ -25,7 +25,7 @@ class SDErrorScreen(Screen):
         self.add_widget(layout)
 
     @override
-    def on_enter(self, *args):
+    def on_pre_enter(self, *args):
         tmp_data = self.main_app.tmp_data
         if "error" in tmp_data:
             self.error_label.text = self.main_app.tmp_data["error"]
