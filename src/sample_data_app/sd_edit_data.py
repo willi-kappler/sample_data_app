@@ -149,9 +149,10 @@ class SDEditScreen(Screen):
         self.gps_location.text = f"{lat=}, {lon=}"
 
     def request_android_permissions(self):
+        # From the GPS example:
+        # https://github.com/kivy/plyer/blob/master/examples/gps/main.py
+
         from android.permissions import request_permissions, Permission # type: ignore
 
         request_permissions([Permission.ACCESS_COARSE_LOCATION, Permission.ACCESS_FINE_LOCATION])
-
-
 
