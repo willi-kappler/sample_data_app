@@ -16,8 +16,8 @@ class SDMainScreen(Screen):
 
         scan_button = Button(text="Scan QR code")
         scan_button.bind(on_release=lambda obj: self.main_app.scan_screen()) # type: ignore
-        edit_button = Button(text="Edit Data")
-        edit_button.bind(on_release=lambda obj: self.main_app.edit_screen()) # type: ignore
+        edit_button = Button(text="View Data")
+        edit_button.bind(on_release=lambda obj: self.main_app.list_view_screen()) # type: ignore
         quit_button = Button(text="Quit")
         quit_button.bind(on_release=lambda obj: self.main_app.quit()) # type: ignore
 
