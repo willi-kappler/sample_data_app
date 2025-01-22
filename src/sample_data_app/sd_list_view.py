@@ -16,18 +16,20 @@ class SDListViewScreen(Screen):
 
         self.layout = BoxLayout(orientation="vertical")
 
-        scroll_view = ScrollView(do_scroll_x=False)
-        scroll_view.add_widget(self.layout)
+        self.scroll_view = ScrollView(do_scroll_x=False)
+        self.scroll_view.add_widget(self.layout)
 
-        self.add_widget(scroll_view)
+        self.add_widget(self.scroll_view)
 
     @override
     def on_pre_enter(self, *args):
+        self.scroll_view.clear_widgets()
         self.layout.clear_widgets()
 
         all_data = self.main_app.all_data
+        all_data_len = len(all_data)
 
-        if len(all_data) > 0:
+        if all_data_len > 0:
             for k, v in all_data.items():
                 # First row
                 label1 = Button(text=k, disabled=True, text_size=(200, None))
@@ -68,6 +70,9 @@ class SDListViewScreen(Screen):
         back = Button(text="Back")
         back.bind(on_release=self.back_to_main) # type: ignore
         self.layout.add_widget(back)
+        self.layout.size_hint_y = None
+        self.layout.height = all_data_len * 300
+        self.scroll_view.add_widget(self.layout)
 
     def delete_data(self, qr_id: str):
         self.main_app.clean_tmp_data()
