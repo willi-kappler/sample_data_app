@@ -18,9 +18,11 @@
       zlib
       (python312.withPackages(ps: with ps; [
         cython
+        distutils
         kivy
         opencv4
         pip
+        pip-system-certs
         plyer
         uv
         ]))
