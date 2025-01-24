@@ -1,0 +1,12 @@
+Bootstrap: localimage
+From: buildozer_base.sif
+
+%post
+    pip3 install --break-system-packages buildozer
+
+%environment
+    export LC_ALL=C
+
+%runscript
+    buildozer $*
+
